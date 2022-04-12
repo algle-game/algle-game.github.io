@@ -47,8 +47,7 @@ function createEdge(s, t){
 	line.setAttribute('onclick', "deleteEdge('"+id+"')");
 	edges.appendChild(line);
 	var nodes = document.getElementById('nodes');
-	var tex = document.getElementById("sequence");
-	tex.innerHTML = "Graph sequence: (" +getDegreeSequence() + ")" 
+	printDegreeSequenceToSVG();
 };
 
 function deleteEdge(id){
@@ -87,9 +86,9 @@ function setKnownEdges(){
 	for (var i = 0; i < N; i++){
 		for (var j = i+1; j < N; j++){
 			if (knownEdges[i][j] == 1){
-				createEdge(i, j);
 				incMatrix[i][j] = 1;
 				incMatrix[j][i] = 1;
+				createEdge(i, j);
 			}
 		}
 	}
