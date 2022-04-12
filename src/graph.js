@@ -56,6 +56,7 @@ function deleteEdge(id){
 	incMatrix[elem[0]][elem[1]] = 0;
 	incMatrix[elem[1]][elem[0]] = 0;
 	document.getElementById(id).remove();
+	printDegreeSequenceToSVG();
 }
 
 function clear(){
@@ -160,8 +161,7 @@ function loadData(){
 function init(){
 	initNodes();
 	//localStorage.clear();
-	var tex = document.getElementById("sequence");
-	tex.innerHTML = "Graph sequence: (" +getDegreeSequence() + ")" 
+	printDegreeSequenceToSVG();
 	loadData();
 };
 
@@ -176,6 +176,10 @@ function getDegreeSequence(){
 	degree_list.sort();
 	degree_list.reverse();
 	return degree_list;
+}
+function printDegreeSequenceToSVG(){
+	var tex = document.getElementById("sequence");
+	tex.innerHTML = "Graph sequence: (" +getDegreeSequence() + ")" 
 }
 
 function check(){
