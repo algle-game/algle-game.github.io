@@ -8,6 +8,14 @@ var incMatrix = null;
 var knownEdges = null;
 const date = new Date();
 const zeroPad = (num, places) => String(num).padStart(places, '0')
+
+Storage.prototype.setObj = function(key, obj) {
+    return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+    return JSON.parse(this.getItem(key))
+}
+
 window.onload = init();
 
 function nodeClick(id){
@@ -39,6 +47,8 @@ function createEdge(s, t){
 	line.setAttribute('onclick', "deleteEdge('"+id+"')");
 	edges.appendChild(line);
 	var nodes = document.getElementById('nodes');
+	var tex = document.getElementById("sequence");
+	tex.innerHTML = "Graph sequence: (" +getDegreeSequence() + ")" 
 };
 
 function deleteEdge(id){
@@ -72,7 +82,7 @@ function clearAll(){
 function setKnownEdges(){
 	if (knownEdges == null){return;}
 	clearAll();
-	console.log(knownEdges + "");
+	//console.log(knownEdges + "");
 	for (var i = 0; i < N; i++){
 		for (var j = i+1; j < N; j++){
 			if (knownEdges[i][j] == 1){
@@ -112,23 +122,22 @@ function initNodes(){
 };
 
 function saveData(){
-	console.log(date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate()));
+	//console.log(date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate()));
 	localStorage.setItem("version", version);
 	localStorage.setItem("date", date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate()));
 	localStorage.setItem("tries", num_tries);
 	var innerhtml = document.getElementById("try"+(num_tries)).innerHTML
 	localStorage.setItem("try"+(num_tries), innerhtml);
-
+	localStorage.setObj("knownEdges", knownEdges);
 }
 
 function loadData(){
 	var today = date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate());
 	if (today.localeCompare(localStorage.getItem("date")) == 0){
-		console.log("YEEES")
 		num_tries = localStorage.getItem("tries");
 		
 		for (var i = 0; i < num_tries; i++){
-			console.log("Restoring Try " +(i+1));
+			//console.log("Restoring Try " +(i+1));
 			
 			var div = document.createElement("div");
 			div.setAttribute("class", "w3-center w3-block w3-border w3-quarter");
@@ -143,15 +152,20 @@ function loadData(){
 			document.getElementById('try').insertBefore(div, document.getElementById("tryrest"));
 		} 
 	}
+	if (localStorage.getItem("knownEdges") != null){
+		knownEdges = localStorage.getObj("knownEdges");
+	}
 }
 
 function init(){
 	initNodes();
 	//localStorage.clear();
+	var tex = document.getElementById("sequence");
+	tex.innerHTML = "Graph sequence: (" +getDegreeSequence() + ")" 
 	loadData();
 };
 
-function check(){
+function getDegreeSequence(){
 	var degree_list = new Array(N).fill(0);
 	for (var i = 0; i < N; i++){
 		for (var j = i; j < N; j++){
@@ -161,6 +175,11 @@ function check(){
 	}
 	degree_list.sort();
 	degree_list.reverse();
+	return degree_list;
+}
+
+function check(){
+	var degree_list = getDegreeSequence();
 	sequence = ""+degree_list;
 	//console.log(sequence + " vs " + getDegreeListToday());
 	if (sequence.localeCompare(getDegreeListToday())!=0){
@@ -173,7 +192,6 @@ function check(){
 		for (var j = i+1; j < N; j++){
 			if (incMatrix[i][j] == 0){continue;}
 			if (colorMap[i][j].localeCompare("green") != 0){
-				console.log(i + ", "+ j)
 				valid = false;
 			}else{
 				knownEdges[i][j] = 1;

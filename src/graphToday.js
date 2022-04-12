@@ -76,6 +76,6 @@ function compareGraph(input){
 		}
 	}
 
-	console.log(result);
+	//console.log(result);
 	return result;
 }
