@@ -1,0 +1,124 @@
+<!DOCTYPE>
+
+<html>
+
+  <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<!--<script id="load"> 
+		const date = new Date();
+		const today = date.getDate();
+		const zeroPad = (num, places) => String(num).padStart(places, '0')
+		
+		var jslink = "src/" + date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate())+".js";
+		var jsel = document.createElement("script");
+		jsel.src = jslink;
+		document.getElementsByTagName('head')[0].appendChild(jsel);
+		
+		/*var jsel2 = document.createElement("script");
+		jsel2.src = "src/secretGraphs/graphToday.js";
+		document.getElementsByTagName('head')[0].appendChild(jsel2);*/
+		
+	</script>-->
+	<script src="src/secretgraphs.js"></script>
+	<script src="src/graphToday.js"></script>
+	  
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <style>
+	  .small { font: italic 4pt sans-serif; }
+      body {font-family: "Lato", sans-serif}
+      .mySlides {display: none}
+      table th {
+      background: #aaa;
+      border-bottom: 2px solid #000;
+      border-left: 2px solid #000;
+      border-right: 2px solid #000;
+      border-top: 2px solid #000;
+      padding-left: 3pt;
+      padding-right: 3pt;
+      } 
+      th, td {
+      border-bottom: 2px solid #626262	;
+      border-left: 1px solid #626262;
+      padding-left: 3pt;
+      padding-right: 3pt;
+      }
+      table td:first-child {
+      border-left: 2px solid #626262;
+      }
+      table td:last-child {
+      border-right: 2px solid #626262;
+      }
+      table{
+      border-collapse: collapse
+      }
+      th:hover{
+      background-color:#ccc;
+      text-shadow: 1px 1px 0px #626262; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+      }
+      tr:hover {background-color:#ccc;}
+      .box_textshadow {
+      text-shadow: 1px 1px 0px #000000; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+      }
+	  .noselect {
+		  -webkit-touch-callout: none; /* iOS Safari */
+			-webkit-user-select: none; /* Safari */
+			 -khtml-user-select: none; /* Konqueror HTML */
+			   -moz-user-select: none; /* Firefox */
+				-ms-user-select: none; /* Internet Explorer/Edge */
+					user-select: none; /* Non-prefixed version, currently
+										  supported by Chrome and Opera */
+	}</style>
+  </head>
+
+  <body id="body" class="noselect">
+	<div class="w3-content w3-center" width="100%" style="max-width:800px;margin-top:46px">
+	<svg id="area" width="85%" viewBox="-30 0 140 120" style="max-width: 800px" xmlns="http://www.w3.org/2000/svg">
+		<g id="edges"> </g>
+		<g id="nodes"> </g>
+		<text x="-25" y="110" class="small">Degree sequence: <script>document.write("("+getDegreeListToday()+")")</script></text>
+	</svg>
+	</br>
+	
+	<input type="button" style="float: left;" value="Check" onclick="check()"/>
+	<input type="button" style="float: left;" value="Clear" onclick="clearAll()"/>
+	<input type="button" style="float: left;" value="Set Known Edges" onclick="setKnownEdges()"/>
+	</br>
+	</div>
+	
+	<div  class="w3-content w3-row" id="try" width="100%" style="max-width:800px;margin-top:46px">
+		<div id="tryrest" class="w3-rest"></div>
+	</div>
+	
+	<div  class="w3-content" id="info" style="max-width:800px">
+	<!--<p width="100%" style="text-align: justify; max-width: 800px;margin-top:46px">-->
+		Graphle is similar to Wordle but with graphs instead of words.
+		The task is to find the secret graph.
+		As a hint, you are given its degree sequence.
+		You can draw the graph by adding edges between nodes.
+		To add an edge, click the corresponding nodes (the first one will be highlighted in blue).
+		To remove an edge, simply click on the edge.
+		If your graph has the same degree sequence as the secret graph, you can press the "Check" button.
+		This will show you, how close you are to the secret graph.
+		Note that the nodes are labeled, i.e., isomorphic solutions are not valid.
+	<!--</p>-->
+	</div>
+	
+	<div class="w3-content" style="max-width:800px">
+		Color code for tries:
+	<ul>
+		<li>Orange Node: Correct degree.</li>
+		<li>Green Node: Correct degree and neighbors.</li>
+		
+		<li>Orange Edge: Incident nodes have correct sum of degrees.</li>
+		<li>Green Edge: The edge appears in the secret graph.</li>
+	</ul>
+	</div>
+	
+	
+	  <script src="src/graph.js"> 
+	  </script>
+  </body>
+
+</html>
