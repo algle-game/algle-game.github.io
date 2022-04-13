@@ -151,9 +151,9 @@ function loadData(){
 			div.appendChild(par);
 			document.getElementById('try').insertBefore(div, document.getElementById("tryrest"));
 		} 
-	}
-	if (localStorage.getItem("knownEdges") != null){
-		knownEdges = localStorage.getObj("knownEdges");
+		if (localStorage.getItem("knownEdges") != null){
+			knownEdges = localStorage.getObj("knownEdges");
+		}
 	}
 }
 
