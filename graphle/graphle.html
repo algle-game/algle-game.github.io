@@ -25,42 +25,26 @@
 	  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	  <style>
+	  <style> 
+	  div {
+		  text-align: justify;
+		  text-justify: inter-word;
+	  }
+	  .frame {
+		  display: block;
+		  width: 70%;
+		  max-width: 800px;
+		  height: 100%;
+		  max-height: 250px;
+		  border: 3px solid #000;
+		  background: #fff; 
+		  margin: 10px 0px 10px 0px;
+		  margin-left: auto;
+		  margin-right: auto;
+		  padding: 15px 25px;
+      }
 	  .small { font: italic 4pt sans-serif; }
-      body {font-family: "Lato", sans-serif}
-      .mySlides {display: none}
-      table th {
-      background: #aaa;
-      border-bottom: 2px solid #000;
-      border-left: 2px solid #000;
-      border-right: 2px solid #000;
-      border-top: 2px solid #000;
-      padding-left: 3pt;
-      padding-right: 3pt;
-      } 
-      th, td {
-      border-bottom: 2px solid #626262	;
-      border-left: 1px solid #626262;
-      padding-left: 3pt;
-      padding-right: 3pt;
-      }
-      table td:first-child {
-      border-left: 2px solid #626262;
-      }
-      table td:last-child {
-      border-right: 2px solid #626262;
-      }
-      table{
-      border-collapse: collapse
-      }
-      th:hover{
-      background-color:#ccc;
-      text-shadow: 1px 1px 0px #626262; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-      }
-      tr:hover {background-color:#ccc;}
-      .box_textshadow {
-      text-shadow: 1px 1px 0px #000000; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-      }
+		body {font-family: "Lato", sans-serif}
 	  .noselect {
 		  -webkit-touch-callout: none; /* iOS Safari */
 			-webkit-user-select: none; /* Safari */
@@ -73,6 +57,7 @@
   </head>
 
   <body id="body" class="noselect">
+    <h1 class="w3-content" style="max-width:800px">Graphle</h1>
 	<div class="w3-content w3-center" width="100%" style="max-width:800px;margin-top:46px">
 	<svg id="area" width="85%" viewBox="-30 0 140 130" style="max-width: 800px" xmlns="http://www.w3.org/2000/svg">
 		<g id="edges"> </g>
@@ -96,13 +81,13 @@
 	<!--<p width="100%" style="text-align: justify; max-width: 800px;margin-top:46px">-->
 		Graphle is similar to Wordle but with graphs instead of words.
 		The task is to find the secret graph.
-		As a hint, you are given its degree sequence.
+		As a hint, you are given its <a href ="https://mathworld.wolfram.com/DegreeSequence.html">degree sequence</a>.
 		You can draw the graph by adding edges between nodes.
 		To add an edge, click the corresponding nodes (the first one will be highlighted in blue).
 		To remove an edge, simply click on the edge.
 		If your graph has the same degree sequence as the secret graph, you can press the "Check" button.
 		This will show you, how close you are to the secret graph.
-		Note that the nodes are labeled, i.e., isomorphic solutions are not valid.
+		Note that the nodes are labeled, i.e., <a href="https://mathworld.wolfram.com/IsomorphicGraphs.html">isomorphic solutions</a> are not valid.
 	<!--</p>-->
 	</div>
 	
@@ -110,18 +95,38 @@
 		Color code for tries:
 	<ul>
 		<li>Orange Node: Correct degree.</li>
-		<li>Green Node: Correct degree and neighbors.</li>
+		<li>Green Node: Correct neighbors.</li>
 		
 		<li>Orange Edge: Incident nodes have correct sum of degrees.</li>
 		<li>Green Edge: The edge appears in the secret graph.</li>
 	</ul>
 	</div>
 	
+	<div class="w3-content" width="70%" style="max-width:800px">
+	Here are two examples (left is an input graph, right is a secret graph)
+	In the first example there are two graphs that are isomorphic but not equal. 
+	The input graph is therefore colored.
+	Green edges are in both graphs, black edges not.
+	Except for the two orange nodes (correct degree), every node has a wrong degree.
+	</div>
+	
+	<div class="w3-content" width="70%" style="max-width:800px">
+	<img class="frame" src="img/isomorph.svg" alt="Two graphs with same degree sequence that are isomorphic but not equal.">
+	</div>
+	
+	<div class="w3-content" width="70%" style="max-width:800px">
+	In the second example there is an orange edge. 
+	With the information that the incident nodes labeled A and B are black, we know that A must have degree three and B must have degree 2.
+	</div>
+	
+	<div class="w3-content" width="70%" style="max-width:800px">
+	<img class="frame" src="img/example.svg" alt="Two graphs with same degree sequence that are isomorphic but not equal.">
+	</div>
 	
 	  <script src="src/graph.js"> 
 	  </script>
 	  
-	<div class="w3-content" style="max-width:800px">Contact: algle.graphgame[at]gmail.com</div>
+	<div class="w3-content" style="max-width:800px">Made by Arne Schmidt (algle.graphgame[at]gmail.com)</div>
   </body>
 
 </html>
