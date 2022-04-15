@@ -57,13 +57,12 @@
   </head>
 
   <body id="body" class="noselect">
-    <h1 class="w3-content" style="max-width:800px">Graphle</h1>
+    <h1 class="w3-content" style="max-width:800px">Graphle (Harder)</h1>
 	<div class="w3-content w3-center" width="100%" style="max-width:800px;margin-top:46px">
-	<svg id="area" width="85%" viewBox="-30 0 140 130" style="max-width: 800px" xmlns="http://www.w3.org/2000/svg">
+	<svg id="area" width="70%" viewBox="0 0 120 120" style="max-width: 800px" xmlns="http://www.w3.org/2000/svg">
 		<g id="edges"> </g>
 		<g id="nodes"> </g>
-		<text x="-25" y="110" class="small">Secret sequence: <script>document.write("("+getDegreeListToday()+")")</script></text>
-		<text id="sequence" x="-25" y="120" class="small"></text>
+		<text id="sequence" x="-0" y="110" class="small"></text>
 	</svg>
 	</br>
 	
@@ -81,14 +80,13 @@
 	<!--<p width="100%" style="text-align: justify; max-width: 800px;margin-top:46px">-->
 		Graphle is similar to Wordle but with graphs instead of words.
 		The task is to find the secret graph.
-		As a hint, you are given its <a href ="https://mathworld.wolfram.com/DegreeSequence.html">degree sequence</a>.
+		As a hint, you are given its number of edges.
 		You can draw the graph by adding edges between nodes.
 		To add an edge, click the corresponding nodes (the first one will be highlighted in blue).
 		To remove an edge, simply click on the edge.
-		If your graph has the same degree sequence as the secret graph, you can press the "Check" button.
+		If your graph has the same number of edges as the secret graph, you can press the "Check" button.
 		This will show you, how close you are to the secret graph.
-		Note that the nodes are labeled, i.e., <a href="https://mathworld.wolfram.com/IsomorphicGraphs.html">isomorphic solutions</a> are not valid.
-		If this version is too easy, you may want to try the <a href="../graphle_hard/graphle.html">version with less information</a> from the secret graph.
+		Note that the nodes are labeled, i.e., <a href="https://mathworld.wolfram.com/IsomorphicGraphs.html">isomorphic solutions</a> are not valid. If this version is too hard, you may want to try the <a href="../graphle/graphle.html">version with more information</a> from the secret graph.
 	<!--</p>-->
 	</div>
 	

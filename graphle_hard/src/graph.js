@@ -8,6 +8,7 @@ var incMatrix = null;
 var knownEdges = null;
 const date = new Date();
 const zeroPad = (num, places) => String(num).padStart(places, '0')
+var num_secret_edges = getNumSecretEdges();
 
 Storage.prototype.setObj = function(key, obj) {
     return this.setItem(key, JSON.stringify(obj))
@@ -25,9 +26,13 @@ function nodeClick(id){
 	}else if (node == id){
 		clear();
 	}else if (incMatrix[node][id] == 0){
-		incMatrix[node][id] = 1;
-		incMatrix[id][node] = 1;
-		createEdge(parseInt(id) < parseInt(node) ? id : node, parseInt(id) < parseInt(node) ? node : id);
+		if (num_secret_edges - getNumEdges() > 0){
+			incMatrix[node][id] = 1;
+			incMatrix[id][node] = 1;
+			createEdge(parseInt(id) < parseInt(node) ? id : node, parseInt(id) < parseInt(node) ? node : id);
+		}else{
+			alert("No edges left. Remove an edge before inserting more edges");
+		}
 		clear();
 	}
 };
@@ -47,7 +52,7 @@ function createEdge(s, t){
 	line.setAttribute('onclick', "deleteEdge('"+id+"')");
 	edges.appendChild(line);
 	var nodes = document.getElementById('nodes');
-	printDegreeSequenceToSVG();
+	printNumEdgesToSVG();
 };
 
 function deleteEdge(id){
@@ -55,7 +60,7 @@ function deleteEdge(id){
 	incMatrix[elem[0]][elem[1]] = 0;
 	incMatrix[elem[1]][elem[0]] = 0;
 	document.getElementById(id).remove();
-	printDegreeSequenceToSVG();
+	printNumEdgesToSVG();
 }
 
 function clear(){
@@ -160,33 +165,28 @@ function loadData(){
 function init(){
 	initNodes();
 	//localStorage.clear();
-	printDegreeSequenceToSVG();
+	printNumEdgesToSVG();
 	loadData();
 };
 
-function getDegreeSequence(){
-	var degree_list = new Array(N).fill(0);
+function getNumEdges(){
+	var num_edges = 0
 	for (var i = 0; i < N; i++){
-		for (var j = i; j < N; j++){
-			degree_list[i] += incMatrix[i][j];
-			degree_list[j] += incMatrix[i][j];
+		for (var j = i+1; j < N; j++){
+			num_edges += incMatrix[i][j];
 		}
 	}
-	degree_list.sort();
-	degree_list.reverse();
-	return degree_list;
+	return num_edges;
 }
-function printDegreeSequenceToSVG(){
+function printNumEdgesToSVG(){
 	var tex = document.getElementById("sequence");
-	tex.innerHTML = "Graph sequence: (" +getDegreeSequence() + ")" 
+	tex.innerHTML = "Edges left: " + (num_secret_edges - getNumEdges())
 }
 
 function check(){
-	var degree_list = getDegreeSequence();
-	sequence = ""+degree_list;
 	//console.log(sequence + " vs " + getDegreeListToday());
-	if (sequence.localeCompare(getDegreeListToday())!=0){
-		alert("Degree sequence is not correct! Your input: " + sequence)
+	if (num_secret_edges - getNumEdges() > 0){
+		alert("There are edges missing")
 		return;
 	}
 	colorMap = compareGraph(incMatrix);
