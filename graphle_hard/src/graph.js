@@ -1,12 +1,12 @@
-var version = 0.2;
-var num_tries = 0;
+var version_h = 0.2;
+var num_tries_h = 0;
 var N = 0
 var svg = document.getElementById('area');
 var svgNS = svg.namespaceURI;
 var node = null;
-var incMatrix = null;
-var knownEdges = null;
-const date = new Date();
+var incMatrix_h = null;
+var knownEdges_h = null;
+const date_h = new Date();
 const zeroPad = (num, places) => String(num).padStart(places, '0')
 var num_secret_edges = getNumSecretEdges();
 
@@ -25,10 +25,10 @@ function nodeClick(id){
 		document.getElementById(node).setAttribute("fill", "blue");
 	}else if (node == id){
 		clear();
-	}else if (incMatrix[node][id] == 0){
+	}else if (incMatrix_h[node][id] == 0){
 		if (num_secret_edges - getNumEdges() > 0){
-			incMatrix[node][id] = 1;
-			incMatrix[id][node] = 1;
+			incMatrix_h[node][id] = 1;
+			incMatrix_h[id][node] = 1;
 			createEdge(parseInt(id) < parseInt(node) ? id : node, parseInt(id) < parseInt(node) ? node : id);
 		}else{
 			alert("No edges left. Remove an edge before inserting more edges");
@@ -57,8 +57,8 @@ function createEdge(s, t){
 
 function deleteEdge(id){
 	var elem = id.split("-");
-	incMatrix[elem[0]][elem[1]] = 0;
-	incMatrix[elem[1]][elem[0]] = 0;
+	incMatrix_h[elem[0]][elem[1]] = 0;
+	incMatrix_h[elem[1]][elem[0]] = 0;
 	document.getElementById(id).remove();
 	printNumEdgesToSVG();
 }
@@ -73,10 +73,10 @@ function clear(){
 function clearAll(){
 	for(var i = 0; i < N; i++){
 		for(var j = i+1; j < N; j++){
-			if (incMatrix[i][j]){
+			if (incMatrix_h[i][j]){
 				var id = i+"-"+j;
-				incMatrix[i][j] = 0;
-				incMatrix[j][i] = 0;
+				incMatrix_h[i][j] = 0;
+				incMatrix_h[j][i] = 0;
 				document.getElementById(id).remove();
 			}
 		}
@@ -84,15 +84,15 @@ function clearAll(){
 	clear();
 }
 
-function setKnownEdges(){
-	if (knownEdges == null){return;}
+function setKnownEdges_h(){
+	if (knownEdges_h == null){return;}
 	clearAll();
-	//console.log(knownEdges + "");
+	//console.log(knownEdges_h + "");
 	for (var i = 0; i < N; i++){
 		for (var j = i+1; j < N; j++){
-			if (knownEdges[i][j] == 1){
-				incMatrix[i][j] = 1;
-				incMatrix[j][i] = 1;
+			if (knownEdges_h[i][j] == 1){
+				incMatrix_h[i][j] = 1;
+				incMatrix_h[j][i] = 1;
 				createEdge(i, j);
 			}
 		}
@@ -118,30 +118,30 @@ function initNodes(){
 	for (var i = 0; i < getNum(); i++){
 		createNode(coords[i][0], coords[i][1], rad);
 	}
-	incMatrix = new Array(N)
-	knownEdges = new Array(N);
+	incMatrix_h = new Array(N)
+	knownEdges_h = new Array(N);
 	for (var i = 0; i < N; i++){
-		incMatrix[i] = new Array(N).fill(0);
-		knownEdges[i] = new Array(N).fill(0);
+		incMatrix_h[i] = new Array(N).fill(0);
+		knownEdges_h[i] = new Array(N).fill(0);
 	}
 };
 
 function saveData(){
-	//console.log(date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate()));
-	localStorage.setItem("version", version);
-	localStorage.setItem("date", date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate()));
-	localStorage.setItem("tries", num_tries);
-	var innerhtml = document.getElementById("try"+(num_tries)).innerHTML
-	localStorage.setItem("try"+(num_tries), innerhtml);
-	localStorage.setObj("knownEdges", knownEdges);
+	//console.log(date_h.getFullYear() + zeroPad(date_h.getMonth()+1,2) + zeroPad(date_h.getDate()));
+	localStorage.setItem("version_h", version_h);
+	localStorage.setItem("date_h", date_h.getFullYear() + zeroPad(date_h.getMonth()+1,2) + zeroPad(date_h.getDate()));
+	localStorage.setItem("tries_h", num_tries_h);
+	var innerhtml = document.getElementById("try"+(num_tries_h)).innerHTML
+	localStorage.setItem("try_h"+(num_tries_h), innerhtml);
+	localStorage.setObj("knownEdges_h", knownEdges_h);
 }
 
 function loadData(){
-	var today = date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate());
-	if (today.localeCompare(localStorage.getItem("date")) == 0){
-		num_tries = localStorage.getItem("tries");
+	var today = date_h.getFullYear() + zeroPad(date_h.getMonth()+1,2) + zeroPad(date_h.getDate());
+	if (today.localeCompare(localStorage.getItem("date_h")) == 0){
+		num_tries_h = localStorage.getItem("tries_h");
 		
-		for (var i = 0; i < num_tries; i++){
+		for (var i = 0; i < num_tries_h; i++){
 			//console.log("Restoring Try " +(i+1));
 			
 			var div = document.createElement("div");
@@ -152,12 +152,12 @@ function loadData(){
 			par.setAttribute('style', "max-width: 200px")
 			par.setAttribute('xmlns', "http://www.w3.org/2000/svg")
 			par.setAttribute('id', "try"+ (i+1));
-			par.innerHTML = localStorage.getItem("try"+(i+1));
+			par.innerHTML = localStorage.getItem("try_h"+(i+1));
 			div.appendChild(par);
 			document.getElementById('try').insertBefore(div, document.getElementById("tryrest"));
 		} 
-		if (localStorage.getItem("knownEdges") != null){
-			knownEdges = localStorage.getObj("knownEdges");
+		if (localStorage.getItem("knownEdges_h") != null){
+			knownEdges_h = localStorage.getObj("knownEdges_h");
 		}
 	}
 }
@@ -173,7 +173,7 @@ function getNumEdges(){
 	var num_edges = 0
 	for (var i = 0; i < N; i++){
 		for (var j = i+1; j < N; j++){
-			num_edges += incMatrix[i][j];
+			num_edges += incMatrix_h[i][j];
 		}
 	}
 	return num_edges;
@@ -189,20 +189,20 @@ function check(){
 		alert("There are edges missing")
 		return;
 	}
-	colorMap = compareGraph(incMatrix);
+	colorMap = compareGraph(incMatrix_h);
 	var valid = true;
 	for (var i = 0; i < N; i++){
 		for (var j = i+1; j < N; j++){
-			if (incMatrix[i][j] == 0){continue;}
+			if (incMatrix_h[i][j] == 0){continue;}
 			if (colorMap[i][j].localeCompare("green") != 0){
 				valid = false;
 			}else{
-				knownEdges[i][j] = 1;
+				knownEdges_h[i][j] = 1;
 			}	
 		}
 	}
 	if (valid){
-		alert("Congratulations! You found the secret Graph in " + (1+num_tries) + (num_tries == 0 ? " try!" : " tries!"));
+		alert("Congratulations! You found the secret Graph in " + (1+num_tries_h) + (num_tries_h == 0 ? " try!" : " tries!"));
 	}
 	drawTry(colorMap);
 	saveData();
@@ -219,12 +219,12 @@ function drawTry(colorMap){
 	par.setAttribute('viewBox', "0 0 100 100")
 	par.setAttribute('style', "max-width: 200px")
 	par.setAttribute('xmlns', "http://www.w3.org/2000/svg")
-	par.setAttribute('id', "try"+ (++num_tries));
+	par.setAttribute('id', "try"+ (++num_tries_h));
 	
 	//Draw Edges
 	for (var i = 0; i < N; i++){
 		for (var j = i+1; j < N; j++){
-			if(incMatrix[i][j]){
+			if(incMatrix_h[i][j]){
 				var line = document.createElementNS(svgNS, 'line');
 				line.setAttribute("x1", coords[i][0]);
 				line.setAttribute("y1", coords[i][1]);
