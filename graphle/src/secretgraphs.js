@@ -737,7 +737,7 @@ var grapharray =[
  [1, 0, 1, 0, 1, 0, 0, 1, 0]]]
  
  
-var dateinit = new Date('04/10/2022');
+var dateinit = new Date('05/01/2022');
 var date_today = new Date();
 var graphnum =  parseInt(date_today.getDate() - dateinit.getDate());
 console.log(graphnum)

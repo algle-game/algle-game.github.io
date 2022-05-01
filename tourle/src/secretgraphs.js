@@ -1207,7 +1207,7 @@ var distancearray =[
 439.6641364484387]
  
  
-var dateinit = new Date('04/16/2022');
+var dateinit = new Date('05/01/2022');
 var date_today = new Date();
 var graphnum =  parseInt(date_today.getDate() - dateinit.getDate());
 //console.log(graphnum)
