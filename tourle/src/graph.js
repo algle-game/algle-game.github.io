@@ -55,6 +55,7 @@ function deleteEdge(id){
 	incMatrix[elem[0]][elem[1]] = 0;
 	incMatrix[elem[1]][elem[0]] = 0;
 	document.getElementById(id).remove();
+	clear();
 }
 
 function clear(){
