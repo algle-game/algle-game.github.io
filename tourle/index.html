@@ -7,9 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<script src="src/secretgraphs.js"></script>
 	<script src="src/graphToday.js"></script>
+	<script src="../js/overlay.js"></script>
 	  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/overlay.css">
 	  <style> 
 	  div {
 		  text-align: justify;
@@ -42,7 +44,9 @@
   </head>
 
   <body id="body" class="noselect">
-    <h1 class="w3-content" style="max-width:800px">Tourle</h1>
+    <h1 class="w3-content" style="max-width:800px">Tourle
+	<img id="info" src="../img/info.png" align="right" width="32px" onclick="openNav()" />
+	</h1>
 	<div class="w3-content w3-center" width="100%" style="max-width:800px;margin-top:46px">
 	<svg id="area" width="85%" viewBox="-10 -10 120 120" style="max-width: 800px" xmlns="http://www.w3.org/2000/svg">
 		<g id="edges"> </g>
@@ -59,6 +63,9 @@
 		<div id="tryrest" class="w3-rest"></div>
 	</div>
 	
+	<div id="overlaydiv" class="w3-content overlay" style="max-width:800px">
+	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <h1 class="w3-content" style="max-width:800px">Tourle</h1>
 	<div  class="w3-content" id="info" style="max-width:800px">
 	<!--<p width="100%" style="text-align: justify; max-width: 800px;margin-top:46px">-->
 		In Tourle, you must find a shortest roundtrip (tour) visiting all nodes.
@@ -71,7 +78,7 @@
 		
 	<!--</p>-->
 	</div>
-	
+	</div>
 	
 	  <script src="src/graph.js"> 
 	  </script>

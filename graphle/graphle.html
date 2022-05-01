@@ -3,131 +3,18 @@
 <html>
 
   <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<!--<script id="load"> 
-		const date = new Date();
-		const today = date.getDate();
-		const zeroPad = (num, places) => String(num).padStart(places, '0')
-		
-		var jslink = "src/" + date.getFullYear() + zeroPad(date.getMonth()+1,2) + zeroPad(date.getDate())+".js";
-		var jsel = document.createElement("script");
-		jsel.src = jslink;
-		document.getElementsByTagName('head')[0].appendChild(jsel);
-		
-		/*var jsel2 = document.createElement("script");
-		jsel2.src = "src/secretGraphs/graphToday.js";
-		document.getElementsByTagName('head')[0].appendChild(jsel2);*/
-		
-	</script>-->
-	<script src="src/secretgraphs.js"></script>
-	<script src="src/graphToday.js"></script>
-	  
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	  <style> 
-	  div {
-		  text-align: justify;
-		  text-justify: inter-word;
-	  }
-	  .frame {
-		  display: block;
-		  width: 70%;
-		  max-width: 800px;
-		  height: 100%;
-		  max-height: 250px;
-		  border: 3px solid #000;
-		  background: #fff; 
-		  margin: 10px 0px 10px 0px;
-		  margin-left: auto;
-		  margin-right: auto;
-		  padding: 15px 25px;
-      }
-	  .small { font: italic 4pt sans-serif; }
-		body {font-family: "Lato", sans-serif}
-	  .noselect {
-		  -webkit-touch-callout: none; /* iOS Safari */
-			-webkit-user-select: none; /* Safari */
-			 -khtml-user-select: none; /* Konqueror HTML */
-			   -moz-user-select: none; /* Firefox */
-				-ms-user-select: none; /* Internet Explorer/Edge */
-					user-select: none; /* Non-prefixed version, currently
-										  supported by Chrome and Opera */
-	}</style>
+	
   </head>
 
   <body id="body" class="noselect">
     <h1 class="w3-content" style="max-width:800px">Graphle</h1>
-	<div class="w3-content w3-center" width="100%" style="max-width:800px;margin-top:46px">
-	<svg id="area" width="85%" viewBox="-30 0 140 130" style="max-width: 800px" xmlns="http://www.w3.org/2000/svg">
-		<g id="edges"> </g>
-		<g id="nodes"> </g>
-		<text x="-25" y="110" class="small">Secret sequence: <script>document.write("("+getDegreeListToday()+")")</script></text>
-		<text id="sequence" x="-25" y="120" class="small"></text>
-	</svg>
-	</br>
 	
-	<input type="button" style="float: left;" value="Check" onclick="check()"/>
-	<input type="button" style="float: left;" value="Clear" onclick="clearAll()"/>
-	<input type="button" style="float: left;" value="Set Known Edges" onclick="setKnownEdges()"/>
-	</br>
-	</div>
-	
-	<div  class="w3-content w3-row" id="try" width="100%" style="max-width:800px;margin-top:46px">
-		<div id="tryrest" class="w3-rest"></div>
-	</div>
 	
 	<div  class="w3-content" id="info" style="max-width:800px">
 	<!--<p width="100%" style="text-align: justify; max-width: 800px;margin-top:46px">-->
-		Graphle is similar to Wordle but with graphs instead of words.
-		The task is to find the secret graph.
-		As a hint, you are given its <a href ="https://mathworld.wolfram.com/DegreeSequence.html">degree sequence</a>.
-		You can draw the graph by adding edges between nodes.
-		To add an edge, click the corresponding nodes (the first one will be highlighted in blue).
-		To remove an edge, simply click on the edge.
-		If your graph has the same degree sequence as the secret graph, you can press the "Check" button.
-		This will show you, how close you are to the secret graph.
-		Note that the nodes are labeled, i.e., <a href="https://mathworld.wolfram.com/IsomorphicGraphs.html">isomorphic solutions</a> are not valid.
-		If this version is too easy, you may want to try the <a href="../graphle_hard/graphle.html">version with less information</a> from the secret graph.
+	Graphle moved and can be played <a href="index.html">here</a>!
 	<!--</p>-->
 	</div>
-	
-	<div class="w3-content" style="max-width:800px">
-		Color code for tries:
-	<ul>
-		<li>Orange Node: Correct degree.</li>
-		<li>Green Node: Correct neighbors.</li>
-		
-		<li>Orange Edge: Incident nodes have correct sum of degrees.</li>
-		<li>Green Edge: The edge appears in the secret graph.</li>
-	</ul>
-	</div>
-	
-	<div class="w3-content" width="70%" style="max-width:800px">
-	Here are two examples (left is an input graph, right is a secret graph)
-	In the first example there are two graphs that are isomorphic but not equal. 
-	The input graph is therefore colored.
-	Green edges are in both graphs, black edges not.
-	Except for the two orange nodes (correct degree), every node has a wrong degree.
-	</div>
-	
-	<div class="w3-content" width="70%" style="max-width:800px">
-	<img class="frame" src="img/isomorph.svg" alt="Two graphs with same degree sequence that are isomorphic but not equal.">
-	</div>
-	
-	<div class="w3-content" width="70%" style="max-width:800px">
-	In the second example there is an orange edge. 
-	With the information that the incident nodes labeled A and B are black, we know that A must have degree three and B must have degree 2.
-	</div>
-	
-	<div class="w3-content" width="70%" style="max-width:800px">
-	<img class="frame" src="img/example.svg" alt="Two graphs with same degree sequence that are isomorphic but not equal.">
-	</div>
-	
-	  <script src="src/graph.js"> 
-	  </script>
-	  
-	<div class="w3-content" style="max-width:800px">Made by Arne Schmidt (algle.graphgame[at]gmail.com)</div>
   </body>
 
 </html>
